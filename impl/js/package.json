@@ -1,14 +1,17 @@
 {
-	"name": "any-ascii",
-	"version": "0.4.0-dev",
+	"name": "@elseu/any-ascii",
+	"version": "0.4.0",
 	"description": "Unicode to ASCII transliteration",
 	"homepage": "https://anyascii.com",
 	"license": "ISC",
 	"author": "Hunter WB (https://hunterwb.com)",
 	"repository": {
 		"type": "git",
-		"url": "git+https://github.com/anyascii/anyascii.git"
+		"url": "git+https://github.com/elseu/anyascii.git"
 	},
+    "publishConfig": {
+      "registry": "https://npm.pkg.github.com/elseu"
+    },
 	"keywords": [
 		"unicode",
 		"ascii",
@@ -20,8 +23,12 @@
 		"unidecode",
 		"normalization"
 	],
-	"type": "module",
-	"exports": "./any-ascii.js",
+	"type": "commonjs",
+	"main": "./any-ascii.js",
+	"exports": {
+		"import": "./any-ascii.mjs",
+		"require": "./any-ascii.js"
+	},
 	"types": "./any-ascii.d.ts",
 	"engines": {
 		"node": ">=12.20"

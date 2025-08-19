@@ -1,29 +1,17 @@
 on:
   workflow_dispatch:
   push:
-    paths:
-    - 'impl/js/**'
-    - '.github/workflows/js.yml'
-  pull_request:
-    paths:
-    - 'impl/js/**'
-    - '.github/workflows/js.yml'
+    tags:
+      - '*'
+
+env:
+  GITHUB_READ_TOKEN: ${{ secrets.NPM_GITHUB_READ_TOKEN }}
 
 defaults:
   run:
     working-directory: ./impl/js
 
 jobs:
-  js-dev:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-node@v4
-        with:
-          node-version: 'lts/*'
-      - run: npm test
-      - run: npm publish --dry-run
-      - run: npm pkg fix && git diff --exit-code
   js:
     runs-on: ubuntu-latest
     strategy:
@@ -36,4 +24,4 @@ jobs:
         with:
           node-version: ${{ matrix.node }}
       - run: npm test
-      - run: npm publish --dry-run
+      - run: npm publish
